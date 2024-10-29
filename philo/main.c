@@ -6,7 +6,7 @@
 /*   By: lmoran <lmoran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 10:52:49 by lmoran            #+#    #+#             */
-/*   Updated: 2024/05/09 11:37:13 by lmoran           ###   ########.fr       */
+/*   Updated: 2024/07/11 17:30:26 by lmoran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	check_valid_args(char **av)
 	return (0);
 }
 
-void	philo(char **av, int numof)
+void	philo(char **av)
 {
 	t_data			data;
-	t_philo			philos[numof];
-	pthread_mutex_t	forks[numof];
+	t_philo			philos[200];
+	pthread_mutex_t	forks[200];
 
 	init_program(&data, philos);
 	init_forks(forks, ft_atoi_philo(av[1]));
@@ -62,6 +62,6 @@ int	main(int argc, char **av)
 		return (write(2, "Wrong argument count\n", 22), 1);
 	if (check_valid_args(av) == 1)
 		return (1);
-	philo(av, ft_atoi_philo(av[1]));
+	philo(av);
 	return (0);
 }

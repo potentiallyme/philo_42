@@ -6,7 +6,7 @@
 /*   By: lmoran <lmoran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:16:37 by lmoran            #+#    #+#             */
-/*   Updated: 2024/07/08 12:34:40 by lmoran           ###   ########.fr       */
+/*   Updated: 2024/07/11 17:06:13 by lmoran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,16 @@
 typedef struct s_philo
 {
 	pthread_t		thread;
-	// * philo
 	int				id;
 	int				eating;
 	int				meals_eaten;
 	int				num_of_philos;
 	int				num_times_to_eat;
-	// * return gettime
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
 	size_t			last_meal;
 	size_t			start_time;
-	// * pointer to data
 	int				*dead_flag;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;

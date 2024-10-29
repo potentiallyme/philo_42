@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_actions.c                                  :+:      :+:    :+:   */
+/*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmoran <lmoran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:12:16 by lmoran            #+#    #+#             */
-/*   Updated: 2024/05/09 11:36:45 by lmoran           ###   ########.fr       */
+/*   Updated: 2024/07/11 17:06:26 by lmoran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void sleep_think(t_philo *p)
+void	print_philo(char *s, t_philo *p, int id)
+{
+	size_t	time;
+
+	pthread_mutex_lock(p->write_lock);
+	time = get_current_time() - p->start_time;
+	if (!dead_loop(p))
+		printf("%zu %d %s\n", time, id, s);
+	pthread_mutex_unlock(p->write_lock);
+}
+
+void	sleep_think(t_philo *p)
 {
 	print_philo("is sleeping", p, p->id);
 	ft_usleep(p->time_to_sleep);
-	print_philo("is thinking", p, p->id);	
+	print_philo("is thinking", p, p->id);
 }
 
 void	eat(t_philo *p)

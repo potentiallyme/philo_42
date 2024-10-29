@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor.c                                          :+:      :+:    :+:   */
+/*   monit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmoran <lmoran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:14:49 by lmoran            #+#    #+#             */
-/*   Updated: 2024/05/09 11:37:01 by lmoran           ###   ########.fr       */
+/*   Updated: 2024/07/11 17:05:50 by lmoran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_philo(char *s, t_philo *p, int id)
-{
-	size_t	time;
-
-	pthread_mutex_lock(p->write_lock);
-	time = get_current_time() - p->start_time;
-	if (!dead_loop(p))
-		printf("%zu %d %s\n", time, id, s);
-	pthread_mutex_unlock(p->write_lock);
-}
-
 int	is_dead(t_philo *p, size_t time_to_die)
 {
 	pthread_mutex_lock(p->meal_lock);
-	if (get_current_time() - p->last_meal >= time_to_die
-		&& p->eating == 0)
+	if (get_current_time() - p->last_meal >= time_to_die && p->eating == 0)
 		return (pthread_mutex_unlock(p->meal_lock), 1);
 	pthread_mutex_unlock(p->meal_lock);
 	return (0);
@@ -53,7 +41,7 @@ int	check_if_dead(t_philo *p)
 	return (0);
 }
 
-void print_eat(t_philo *p)
+void	print_eat(t_philo *p)
 {
 	pthread_mutex_lock(p[0].write_lock);
 	write(1, "All philosophers have eaten enough\n", 35);
